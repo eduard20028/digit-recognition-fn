@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset='utf-8'>
+	<title>Hand Written Digit Recognition using TensorFlow.js</title>
+	<script src="js/chart.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script>
+	<link rel="stylesheet" type="text/css" href="style/style.css">
+</head>
+<body>
+	<div class="app">
+		<div class="app__container">
+			<div class="canvas-draw-wrap">
+				<div class="show-block">
+					<canvas id="canvas_draw" width="200" height="200"></canvas>
+					<img 
+						class="view-img d-none"
+						id="view_img"
+					/>
+				</div>
+			</div>
+			<div class="btn-wrap">
+				<button id="btn_predict">Predict</button>
+				<div class="input-img-wrp">
+					<label 
+					class="input-label-img"
+					id="labelImg"
+					for="input_img"
+					>
+						<i class="input-img-icon">&#9851;</i>
+					</label>
+					<input 
+					class="input-img"
+					id="input_img" 
+					type="file" 
+					accept=".jpg, .jpeg, .png"
+					/> 
+				</div>
+				<button id="btn_clear">Clear</button>
+			</div>
+			<div class="canvas-chart-wrap">
+				<canvas id="canvas_chart" width="100" height="100"></canvas>
+			</div>
+			<div class="prediction-txt-wrp">
+				<p class="prediction-txt"></p>
+			</div>
+		</div>
+	</div>
+
+	<script src="js/index.js"></script>
+	<script src="js/digit-recognition.js"></script>
+	<script src="js/image-field.js"></script>
+</body>
+</html>

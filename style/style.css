@@ -1,0 +1,168 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+button {
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* Display none */
+.d-none {
+  display: none;
+}
+
+/* App */
+
+.app {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #eeeeee;
+}
+
+.app__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 50%;
+  padding: 20px;
+  border-radius: 20px;
+  background: #39393b;
+}
+
+/* Buttons */
+
+.btn-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 200px;
+  margin-bottom: 20px;
+}
+
+.btn-wrap button {
+  width: 40%;
+  padding: 10px 15px;
+  color: #fff;
+  font-size: 16px;
+  border-radius: 20px;
+  transition: 0.3s;
+}
+
+#btn_clear {
+  background: #f10ea2;
+}
+
+#btn_clear:hover {
+  color: #f10ea2;
+  background: rgba(0, 0, 0, 0);
+}
+
+#btn_predict {
+  background: #2360eb;
+}
+#btn_predict:hover {
+  color: #2360eb;
+  background: rgba(0, 0, 0, 0);
+}
+
+/* Wrapper for Canvas and View Image */
+
+.show-block {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 100%;
+  height: 200px;
+  border-radius: 5px;
+}
+
+/* Canvas */
+
+.canvas-draw-wrap {
+  margin-bottom: 20px;
+}
+
+.canvas-chart-wrap {
+  width: 200px;
+  height: 200px;
+  margin-bottom: 10px;
+  border-radius: 20px;
+  background: #fff;
+}
+
+#canvas_draw {
+  border: solid 1px #000;
+}
+
+/* View Image */
+
+#view_img {
+  max-width: 100%;
+  max-height: 100%;
+  min-width: 200px;
+  min-height: 200px;
+  border: solid 1px #000;
+  border-radius: 20px;
+}
+
+/* Prediction text */
+
+.prediction-txt-wrp {
+  height: 20px;
+}
+
+.prediction-txt {
+  color: #fff;
+}
+
+.prediction-txt > b {
+  color: #b7b7b7;
+}
+
+/* Input field for upload image */
+
+.input-img-wrp {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 38px;
+}
+
+.input-label-img {
+  display: flex;
+  cursor: pointer;
+  transition: 0.1s;
+}
+
+.input-img-icon {
+  font-style: normal;
+  font-size: 32px;
+  color: #fff;
+  transition: 0.1s;
+}
+
+.input-img-icon:hover,
+.input-lbl-img:hover .input-img-icon {
+  color: #b8b8b8;
+}
+
+.input-img {
+  width: 0;
+  height: 0;
+  opacity: 0;
+  position: absolute;
+  z-index: -1;
+}
