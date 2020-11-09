@@ -28,11 +28,8 @@ function digitRecognition(document) {
 
   let ctx = canvas.getContext('2d')
   ctx.font = '16px Arial'
-  ctx.fillText('Draw just here', 50, 100)
+  ctx.fillText('Нарисуй цифру здесь', 20, 100)
 
-  //---------------------
-  // MOUSE DOWN function
-  //---------------------
   canvas.onmousedown = function (e) {
     let rect = canvas.getBoundingClientRect()
     let mouseX = e.clientX - rect.left
@@ -42,9 +39,6 @@ function digitRecognition(document) {
     drawOnCanvas()
   }
 
-  //---------------------
-  // MOUSE MOVE function
-  //---------------------
   canvas.onmousemove = function (e) {
     if (drawing) {
       let rect = canvas.getBoundingClientRect()
@@ -55,32 +49,20 @@ function digitRecognition(document) {
     }
   }
 
-  //-------------------
-  // MOUSE UP function
-  //-------------------
   canvas.onmouseup = function (e) {
     drawing = false
   }
 
-  //----------------------
-  // MOUSE LEAVE function
-  //----------------------
   canvas.mouseleave = function (e) {
     drawing = false
   }
 
-  //--------------------
-  // ADD CLICK function
-  //--------------------
   function addUserGesture(x, y, dragging) {
     clickX.push(x)
     clickY.push(y)
     clickD.push(dragging)
   }
 
-  //-------------------
-  // RE DRAW function
-  //-------------------
   function drawOnCanvas() {
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
 
@@ -101,10 +83,6 @@ function digitRecognition(document) {
     }
   }
 
-  //------------------------
-  // CLEAR CANVAS function
-  //------------------------
-
   clearBtn.onclick = function () {
     ctx.restore()
     ctx.setTransform(1, 0, 0, 1, 0, 0)
@@ -118,27 +96,14 @@ function digitRecognition(document) {
     canvasChart.style.display = 'none'
   }
 
-  // -------------------------------------
-  // loader for cnn model
-  // -------------------------------------
   async function loadModel() {
-    console.log('model loading...')
-
-    // clear the model letiable
     model = undefined
-
-    // load the model using a HTTPS request (where you have stored your model files)
     model = await tf.loadLayersModel('../models/model.json')
-    console.log('model loaded.')
   }
 
   loadModel()
 
-  //-----------------------------------------------
-  // preprocess the canvas
-  //-----------------------------------------------
   function preprocessCanvas(image) {
-    // resize the input image to target size of (1, 28, 28)
     let tensor = tf.browser
       .fromPixels(image)
       .resizeNearestNeighbor([28, 28])
@@ -149,10 +114,6 @@ function digitRecognition(document) {
     return tensor.div(255.0)
   }
 
-  //--------------------------------------------
-  // predict function
-  //--------------------------------------------
-
   predictBtn.onclick = async function () {
     let tensor
     if (!canvas.classList.contains('d-none')) {
@@ -160,62 +121,11 @@ function digitRecognition(document) {
     } else if (!viewImg.classList.contains('d-none')) {
       tensor = preprocessCanvas(viewImg)
     }
-
-    // make predictions on the preprocessed image tensor
     let predictions = await model.predict(tensor).data()
-
-    // get the model's prediction results
     let results = Array.from(predictions)
 
-    // display the predictions in chart
-    displayChart(results)
     displayLabel(results)
-
     canvasChart.style.display = 'block'
-  }
-
-  //------------------------------
-  // Chart to display predictions
-  //------------------------------
-  let chart = ''
-  let firstTime = 0
-
-  function loadChart(label, data, modelSelected) {
-    let ctx = document.getElementById('canvas_chart').getContext('2d')
-    chart = new Chart(ctx, {
-      // The type of chart we want to create
-      type: 'bar',
-
-      // The data for our dataset
-      data: {
-        labels: label,
-        datasets: [
-          {
-            label: modelSelected + ' prediction',
-            backgroundColor: '#f50057',
-            borderColor: 'rgb(255, 99, 132)',
-            data: data
-          }
-        ]
-      }
-    })
-  }
-
-  //----------------------------
-  // display chart with updated
-  // drawing from canvas
-  //----------------------------
-  function displayChart(data) {
-    let select_option = 'CNN'
-
-    let label = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
-    if (firstTime == 0) {
-      loadChart(label, data, select_option)
-      firstTime = 1
-    } else {
-      chart.destroy()
-      loadChart(label, data, select_option)
-    }
   }
 
   function displayLabel(data) {
@@ -229,12 +139,9 @@ function digitRecognition(document) {
       }
     }
     predictTxt.innerHTML =
-      'Predicting you draw <b>' + maxIndex + '</b> with <b>' + Math.trunc(max * 100) + '%</b> confidence'
+      'Нарисованная цифра: <b>' + maxIndex + '</b>, процент совпадения <b>' + Math.trunc(max * 100) + '%</b>'
   }
 
-  //---------------------
-  // SET SHOW function is used for toggle view drawer or upload image
-  //---------------------
   function setShow(isCanvas, isImage) {
     if (isCanvas) {
       canvas.classList.remove('d-none')
@@ -245,9 +152,6 @@ function digitRecognition(document) {
     }
   }
 
-  //---------------------
-  // IMAGE FIELD functions is used for upload image and handle changes when you upload new image
-  //---------------------
   function clearUrl() {
     inputImg.value = ''
     viewImg.removeAttribute('src')
