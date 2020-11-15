@@ -12,7 +12,6 @@ function digitRecognition(document) {
 
   let clearBtn = document.getElementById('btn_clear')
   let predictBtn = document.getElementById('btn_predict')
-  let canvasChart = document.getElementById('canvas_chart')
 
   let canvas = document.getElementById('canvas_draw')
   let viewImg = document.getElementById('view_img')
@@ -93,12 +92,11 @@ function digitRecognition(document) {
     clickD = new Array()
     predictTxt.innerHTML = ''
     setShow(true, false)
-    canvasChart.style.display = 'none'
   }
 
   async function loadModel() {
     model = undefined
-    model = await tf.loadLayersModel('../models/model.json')
+    model = await tf.loadLayersModel('./models/model.json')
   }
 
   loadModel()
@@ -125,7 +123,6 @@ function digitRecognition(document) {
     let results = Array.from(predictions)
 
     displayLabel(results)
-    canvasChart.style.display = 'block'
   }
 
   function displayLabel(data) {

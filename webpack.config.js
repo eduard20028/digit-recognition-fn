@@ -11,6 +11,14 @@ const config = function (mode) {
     module: {
       rules: [
         {
+          test: /\.(bin|json)$/i,
+          use: [
+            {
+              loader: 'file-loader'
+            }
+          ]
+        },
+        {
           test: /\.js$/,
           exclude: /(node_modules|bower_components)/,
           use: {

@@ -6,6 +6,7 @@
   "scripts": {
     "build": "webpack-cli",
     "start": "webpack-dev-server",
+    "predeploy": "npm run build",
     "deploy": "gh-pages -d public",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -30,6 +31,7 @@
     "babel-loader": "^7.1.0",
     "babel-preset-env": "^1.7.0",
     "css-loader": "^2.0.0",
+    "file-loader": "^6.2.0",
     "json-loader": "^0.5.7",
     "sass": "^1.28.0",
     "sass-loader": "^10.0.4",
